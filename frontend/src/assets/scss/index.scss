@@ -7,3 +7,6 @@
 @include meta.load-css("overrides/singul-override");
 @include meta.load-css("overrides/mui-override");
 @include meta.load-css("overrides/shuffle-override");
+
+// Product-level white-label design system primitives.
+@import "product-ui";

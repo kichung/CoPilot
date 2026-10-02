@@ -162,6 +162,7 @@ function handleUpdateExpandedKeys(value: string[]) {
 
 .direction-rtl {
 	.nav {
+		padding-top: 6px;
 		:deep() {
 			.n-submenu-children {
 				--dash-offset: 25px;

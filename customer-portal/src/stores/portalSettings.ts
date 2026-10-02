@@ -45,6 +45,9 @@ export const usePortalSettingsStore = defineStore("portalSettings", {
 		},
 		portalLogoInitials(): string {
 			return getAvatar({ seed: this.portalInitials, text: this.portalInitials, size: 64 })
+		},
+		portalBrandColor(state): string | null {
+			return state.branding?.brand_color || state.settings?.brand_color || null
 		}
 	},
 

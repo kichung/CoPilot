@@ -1,5 +1,6 @@
 <template>
 	<Provider>
+		<a class="skip-link" href="#app-view">Skip to main content</a>
 		<component
 			:is="layoutComponent"
 			id="app-layout"
@@ -24,16 +25,18 @@
 <script lang="ts" setup>
 import type { Component } from "vue"
 import type { RouteLocationNormalized } from "vue-router"
-import type { Layout, RouterTransition, ThemeNameEnum } from "@/types/theme"
+import type { Layout, RouterTransition } from "@/types/theme"
 import { computed, onBeforeMount, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import Blank from "@/app-layouts/Blank"
 import Provider from "@/app-layouts/common/Provider.vue"
 import SplashScreen from "@/app-layouts/common/SplashScreen.vue"
 import HorizontalNav from "@/app-layouts/HorizontalNav"
+import tokens from "@/design-tokens.json"
 import { useAuthStore } from "@/stores/auth"
 import { useMainStore } from "@/stores/main"
 import { useThemeStore } from "@/stores/theme"
+import { ThemeNameEnum } from "@/types/theme"
 import { usePortalSettingsStore } from "./stores/portalSettings"
 import { updateFavicon } from "./utils"
 
@@ -90,6 +93,15 @@ watch(
 	{ immediate: true }
 )
 
+watch(
+	() => portalSettingsStore.portalBrandColor,
+	brandColor => {
+		themeStore.setColor(ThemeNameEnum.Light, "primary", brandColor || tokens.colors.light.primary)
+		themeStore.setColor(ThemeNameEnum.Dark, "primary", brandColor || tokens.colors.dark.primary)
+	},
+	{ immediate: true }
+)
+
 watch(layoutComponentName, () => {
 	loading.value = false
 })
@@ -118,3 +130,23 @@ onBeforeMount(async () => {
 	}, 500)
 })
 </script>
+
+
+<style scoped>
+.skip-link {
+	position: fixed;
+	z-index: 9999;
+	top: 10px;
+	left: 10px;
+	padding: 9px 12px;
+	border-radius: 9px;
+	background: var(--primary-color);
+	color: white;
+	font-size: 12px;
+	font-weight: 700;
+	text-decoration: none;
+	transform: translateY(-180%);
+	transition: transform 0.16s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+</style>

@@ -4,7 +4,7 @@
 			<Logo class="mb-4" max-height="40px" />
 			<div class="font-display mb-4 text-4xl font-bold" data-test="login-title">{{ portalTitle }}</div>
 			<div class="text-secondary text-lg">
-				Access the world of OpenSource security: Simplified, Streamlined, Accessible.
+				{{ brandConfig.tagline }}
 			</div>
 		</div>
 
@@ -18,6 +18,7 @@
 import type { FormType } from "./types"
 import { computed, onBeforeMount, ref } from "vue"
 import Logo from "@/app-layouts/common/Logo.vue"
+import { brandConfig } from "@/branding/brand.config"
 import { usePortalSettingsStore } from "@/stores/portalSettings"
 import SignIn from "./SignIn.vue"
 
@@ -29,7 +30,7 @@ const type = ref<FormType>("signin")
 
 const portalSettingsStore = usePortalSettingsStore()
 
-const portalTitle = computed(() => portalSettingsStore.portalTitle || "SOCFortress Customer Portal")
+const portalTitle = computed(() => portalSettingsStore.portalTitle || brandConfig.portalFallbackTitle)
 
 onBeforeMount(() => {
 	if (props.type) {

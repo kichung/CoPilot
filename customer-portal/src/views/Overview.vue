@@ -17,20 +17,24 @@
 			read as one block. Alerts come first because they are the primary feed.
 		-->
 		<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-			<RecentAlertsPanel
+			<div class="portal-panel overflow-hidden">
+				<RecentAlertsPanel
 				:alerts
 				:loading="showSkeleton.alerts"
 				:error="errors.alerts"
 				@retry="refresh()"
-				@updated="refresh()"
-			/>
-			<RecentCasesPanel
+					@updated="refresh()"
+				/>
+			</div>
+			<div class="portal-panel overflow-hidden">
+				<RecentCasesPanel
 				:cases
 				:loading="showSkeleton.cases"
 				:error="errors.cases"
 				@retry="refresh()"
-				@updated="refresh()"
-			/>
+					@updated="refresh()"
+				/>
+			</div>
 		</div>
 	</div>
 </template>

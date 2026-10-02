@@ -82,6 +82,8 @@ onMounted(() => {
 	overflow-x: hidden;
 	overflow-y: auto;
 	background-color: var(--bg-sidebar-color);
+	border-right: 1px solid rgba(var(--border-color-rgb) / 0.55);
+	box-shadow: 8px 0 28px rgba(3, 7, 18, 0.035);
 	transition:
 		width var(--sidebar-anim-ease) var(--sidebar-anim-duration),
 		box-shadow var(--sidebar-anim-ease) var(--sidebar-anim-duration),
@@ -90,6 +92,9 @@ onMounted(() => {
 
 	.sidebar-wrap {
 		overflow: hidden;
+		background:
+			linear-gradient(180deg, rgba(var(--primary-color-rgb) / 0.055), transparent 22%),
+			var(--bg-sidebar-color);
 	}
 
 	:deep(.n-scrollbar-rail) {

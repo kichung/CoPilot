@@ -8,6 +8,7 @@
 import { NAvatar, NDropdown } from "naive-ui"
 import { h, ref } from "vue"
 import { useRouter } from "vue-router"
+import { brandConfig } from "@/branding/brand.config"
 import { useAuthStore } from "@/stores/auth"
 import { renderIcon } from "@/utils"
 
@@ -38,7 +39,7 @@ const options = ref([
 			h(
 				"a",
 				{
-					href: "https://docs.socfortress.co/",
+					href: brandConfig.docsUrl,
 					target: "_blank",
 					rel: "noopener noreferrer"
 				},
@@ -52,13 +53,13 @@ const options = ref([
 			h(
 				"a",
 				{
-					href: "https://www.socfortress.co/contact-us",
+					href: brandConfig.supportUrl,
 					target: "_blank",
 					rel: "noopener noreferrer"
 				},
-				"Contact SOCFortress"
+				`Contact ${brandConfig.companyName}`
 			),
-		key: "contact-socfortress",
+		key: "contact-brand",
 		icon: renderIcon(ContactIcon)
 	},
 	{

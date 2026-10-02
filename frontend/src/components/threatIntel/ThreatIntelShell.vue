@@ -1,14 +1,14 @@
 <template>
 	<div class="flex flex-col gap-6">
-		<header class="flex flex-col gap-1">
-			<div class="flex items-center gap-3">
-				<Icon :name="ThreatIcon" :size="22" />
-				<h2 class="text-2xl font-semibold">Threat Intel</h2>
-			</div>
-			<p class="text-sm">
-				Look up an indicator or submit a file to the threat intelligence sources connected to CoPilot.
-			</p>
-		</header>
+		<PageHeader
+			eyebrow="Investigation"
+			title="Threat Intelligence"
+			description="Enrich indicators and files against the threat intelligence services connected to this deployment."
+		>
+			<template #meta>
+				<div class="flex items-center gap-2 text-xs"><Icon :name="ThreatIcon" :size="16" /> Enrichment workspace</div>
+			</template>
+		</PageHeader>
 
 		<n-alert v-if="openCTIRequestedButMissing" type="warning" show-icon closable>
 			<template #header>OpenCTI is not configured</template>
@@ -47,6 +47,7 @@ import { NAlert, NTabPane, NTabs } from "naive-ui"
 import { computed, onBeforeMount, ref } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import Icon from "@/components/common/Icon.vue"
+import PageHeader from "@/components/ui/PageHeader.vue"
 import OpenCTIPanel from "@/components/opencti/OpenCTIPanel.vue"
 import { useOpenCTIAvailability } from "@/composables/useOpenCTIAvailability"
 import ThreatIntelForm from "./ThreatIntelForm.vue"

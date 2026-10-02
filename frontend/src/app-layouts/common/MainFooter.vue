@@ -2,21 +2,12 @@
 	<footer class="footer py-4" :class="{ boxed }">
 		<div class="wrap flex items-center justify-end gap-3">
 			<div class="copy">
-				Made with
-				<Icon :size="18" class="text-primary mx-1">
-					<BrainIcon />
-				</Icon>
-				By
-				<a
-					href="https://www.socfortress.co/"
-					target="_blank"
-					alt="SOCFortress"
-					rel="noopener noreferrer"
-					class="mx-1"
-				>
-					SOCFortress
+				<span>© {{ year }} </span>
+				<a v-if="brandConfig.websiteUrl" :href="brandConfig.websiteUrl" target="_blank" rel="noopener noreferrer" class="font-bold no-underline">
+					{{ brandConfig.companyName }}
 				</a>
-				All rights Reserved © Copyright {{ year }}
+				<span v-else class="font-bold">{{ brandConfig.companyName }}</span>
+				<span>. All rights reserved.</span>
 			</div>
 		</div>
 	</footer>
@@ -24,8 +15,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue"
-import BrainIcon from "@/assets/icons/brain-icon.svg"
-import Icon from "@/components/common/Icon.vue"
+import { brandConfig } from "@/branding/brand.config"
 
 const { boxed } = defineProps<{
 	boxed: boolean
@@ -50,17 +40,6 @@ const year = ref(new Date().getFullYear())
 
 		.copy {
 			line-height: 1.6;
-
-			a {
-				font-weight: bold;
-				text-decoration: none;
-			}
-			* {
-				display: inline;
-			}
-			i {
-				display: inline-block;
-			}
 		}
 	}
 
@@ -72,10 +51,6 @@ const year = ref(new Date().getFullYear())
 
 	@media (max-width: 700px) {
 		font-size: 10px;
-
-		i.n-icon {
-			font-size: 18px !important;
-		}
 	}
 }
 </style>

@@ -4,3 +4,6 @@
 @include meta.load-css("common-animations");
 @include meta.load-css("router-animations");
 @include meta.load-css("overrides/naive-override");
+
+// Customer-facing product presentation layer.
+@import "portal-product-ui";

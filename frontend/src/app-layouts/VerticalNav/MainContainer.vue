@@ -17,6 +17,7 @@
 			<Toolbar :boxed="toolbarBoxed" gradient="body" />
 			<div
 				id="app-view"
+				tabindex="-1"
 				class="view"
 				:class="{ boxed, 'view-padded': overridePadded === true, 'view-no-padded': overridePadded === false }"
 			>
@@ -85,6 +86,7 @@ onMounted(() => {
 	position: relative;
 	padding-left: var(--sidebar-open-width);
 	background-color: var(--bg-body-color);
+	background-image: radial-gradient(circle at 12% -10%, rgba(var(--primary-color-rgb) / 0.055), transparent 30%);
 	transition: all var(--sidebar-anim-ease) var(--sidebar-anim-duration);
 	display: flex;
 	flex-direction: column;

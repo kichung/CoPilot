@@ -1,0 +1,113 @@
+:root {
+	--product-panel-radius: 16px;
+	--product-panel-radius-sm: 12px;
+	--product-panel-shadow: 0 14px 40px rgba(3, 7, 18, 0.08);
+	--product-panel-border: rgba(var(--border-color-rgb) / 0.78);
+	--product-focus-ring: 0 0 0 3px rgba(var(--primary-color-rgb) / 0.22);
+}
+
+.ui-page-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 24px;
+	padding: 22px 24px;
+	border: 1px solid var(--product-panel-border);
+	border-radius: var(--product-panel-radius);
+	background:
+		linear-gradient(135deg, rgba(var(--primary-color-rgb) / 0.085), transparent 46%),
+		var(--bg-default-color);
+	box-shadow: var(--product-panel-shadow);
+}
+
+.ui-page-header__copy { min-width: 0; }
+.ui-page-header__title-row { display: flex; align-items: flex-end; gap: 18px; }
+.ui-page-header h1 { margin: 0; font-family: var(--font-family-display); font-size: clamp(1.65rem, 2.4vw, 2.25rem); line-height: 1.1; letter-spacing: -0.035em; }
+.ui-page-header p { margin: 8px 0 0; max-width: 760px; color: var(--fg-secondary-color); font-size: 0.9rem; line-height: 1.6; }
+.ui-page-header__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.ui-page-header__meta { color: var(--fg-secondary-color); font-size: 0.75rem; }
+
+.ui-eyebrow {
+	margin-bottom: 7px;
+	color: var(--primary-color);
+	font-size: 0.68rem;
+	font-weight: 800;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+}
+
+.ui-section-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 20px;
+	margin-bottom: 16px;
+}
+.ui-section-header h2 { margin: 0; font-family: var(--font-family-display); font-size: 1.12rem; font-weight: 720; letter-spacing: -0.02em; }
+.ui-section-header p { margin: 5px 0 0; max-width: 700px; color: var(--fg-secondary-color); font-size: 0.78rem; line-height: 1.5; }
+.ui-section-header__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ui-panel {
+	min-width: 0;
+	border: 1px solid var(--product-panel-border);
+	border-radius: var(--product-panel-radius);
+	background: var(--bg-default-color);
+	box-shadow: 0 8px 26px rgba(3, 7, 18, 0.045);
+}
+.ui-panel--soft { background: var(--bg-secondary-color); box-shadow: none; }
+.ui-panel--padded { padding: 18px; }
+
+.ui-stat-tile {
+	position: relative;
+	overflow: hidden;
+	padding: 16px;
+	border: 1px solid var(--product-panel-border);
+	border-radius: var(--product-panel-radius-sm);
+	background: var(--bg-default-color);
+}
+.ui-stat-tile::after { content: ""; position: absolute; inset: auto 0 0; height: 2px; background: rgba(var(--border-color-rgb) / 0.55); }
+.ui-stat-tile--info::after { background: var(--info-color); }
+.ui-stat-tile--success::after { background: var(--success-color); }
+.ui-stat-tile--warning::after { background: var(--warning-color); }
+.ui-stat-tile--danger::after { background: var(--error-color); }
+.ui-stat-tile__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ui-stat-tile__label { color: var(--fg-secondary-color); font-size: 0.72rem; font-weight: 650; letter-spacing: 0.02em; }
+.ui-stat-tile__value { margin-top: 9px; font-family: var(--font-family-display); font-size: 1.65rem; font-weight: 760; letter-spacing: -0.04em; }
+.ui-stat-tile__hint { margin-top: 5px; color: var(--fg-tertiary-color); font-size: 0.7rem; }
+
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+	outline: none;
+	box-shadow: var(--product-focus-ring);
+}
+
+@media (max-width: 800px) {
+	.ui-page-header { align-items: stretch; flex-direction: column; padding: 18px; }
+	.ui-page-header__actions { justify-content: flex-start; }
+	.ui-section-header { align-items: flex-start; flex-direction: column; }
+}
+
+/* R7 accessibility and responsive hardening */
+#app-view:focus { outline: none; }
+.page { min-width: 0; }
+.ui-panel { overflow-wrap: anywhere; }
+
+@media (max-width: 700px) {
+	:root { --product-panel-radius: 13px; --product-panel-radius-sm: 10px; }
+	.ui-page-header h1 { font-size: 1.55rem; }
+	.ui-page-header p { font-size: 0.82rem; }
+	.ui-panel--padded { padding: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+@media (pointer: coarse) {
+	:where(button, [role="button"], a.n-button) { min-height: 40px; }
+}

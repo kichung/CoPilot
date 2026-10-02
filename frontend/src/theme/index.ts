@@ -1,6 +1,7 @@
 import type { GlobalThemeOverrides, ThemeCommonVars } from "naive-ui"
 import { useOsTheme } from "naive-ui"
 import tokens from "@/design-tokens.json"
+import { brandConfig } from "@/branding/brand.config"
 import { Layout, RouterTransition, ThemeNameEnum } from "@/types/theme"
 import { colorToArray, colorToHslValues, expandPattern, getThemeColors, getTypeValue } from "@/utils/theme"
 
@@ -53,7 +54,16 @@ export function getDefaultState() {
 		toolbarHeight: 80, // Default toolbar height (in pixels)
 		viewPadding: 40, // Default view padding (in pixels)
 		headerBarHeight: 60, // Height of the header bar (in pixels)
-		colors: tokens.colors, // Color definitions from the token
+		colors: {
+			light: {
+				...tokens.colors.light,
+				primary: brandConfig.primaryColor ?? tokens.colors.light.primary
+			},
+			dark: {
+				...tokens.colors.dark,
+				primary: brandConfig.primaryColor ?? tokens.colors.dark.primary
+			}
+		}, // Color definitions from tokens with an optional deployment brand override
 		borderRadius: tokens.borderRadius, // Border radius from the token
 		lineHeight: tokens.lineHeight, // Line height from the token
 		fontSize: tokens.fontSize, // Font size from the token

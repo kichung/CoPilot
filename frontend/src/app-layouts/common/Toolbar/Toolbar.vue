@@ -7,6 +7,7 @@
 			</div>
 
 			<Breadcrumb class="grow" />
+			<WorkspaceContext />
 			<PinnedPages />
 
 			<PillWrapper>
@@ -36,6 +37,7 @@ import PillWrapper from "./PillWrapper.vue"
 import PinnedPages from "./PinnedPagesV2.vue"
 import Search from "./Search.vue"
 import ThemeSwitch from "./ThemeSwitch.vue"
+import WorkspaceContext from "./WorkspaceContext.vue"
 
 const { boxed, gradient } = defineProps<{
 	boxed: boolean
@@ -57,6 +59,7 @@ const openNav = () => themeStore.openSidebar()
 	padding: 0 var(--view-padding);
 	z-index: 3;
 	overflow: hidden;
+	border-bottom: 1px solid rgba(var(--border-color-rgb) / 0.32);
 
 	.wrap {
 		height: var(--toolbar-height);

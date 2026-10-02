@@ -1,6 +1,11 @@
 <template>
 	<div class="page page-wrapped page-without-footer flex flex-col">
-		<div class="wrapper flex grow gap-4">
+		<PageHeader
+			eyebrow="Endpoint operations"
+			title="Agents"
+			description="Monitor endpoint connectivity, asset criticality, customer ownership, and agent-level response workflows."
+		/>
+		<div class="wrapper flex min-h-0 grow gap-4">
 			<div class="sidebar p-px">
 				<AgentToolbar
 					v-model="textFilter"
@@ -80,6 +85,7 @@ import Api from "@/api"
 import AgentCard from "@/components/agents/AgentCard.vue"
 import AgentToolbar from "@/components/agents/AgentToolbar.vue"
 import BulkDeleteModal from "@/components/agents/BulkDeleteModal.vue"
+import PageHeader from "@/components/ui/PageHeader.vue"
 import { useNavigation } from "@/composables/useNavigation"
 import { AgentStatus } from "@/types/agents"
 import { getApiErrorMessage } from "@/utils"

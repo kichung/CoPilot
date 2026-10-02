@@ -7,6 +7,7 @@
 <script lang="ts" setup>
 import { NMenu } from "naive-ui"
 import { computed, h, ref } from "vue"
+import { brandConfig } from "@/branding/brand.config"
 import { useThemeStore } from "@/stores/theme"
 import { renderIcon } from "@/utils"
 
@@ -21,7 +22,7 @@ const menuOptions = ref([
 			h(
 				"a",
 				{
-					href: "https://docs.socfortress.co",
+					href: brandConfig.docsUrl,
 					target: "_blank",
 					rel: "noopener noreferrer"
 				},

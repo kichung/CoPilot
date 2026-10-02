@@ -1,5 +1,6 @@
 <template>
 	<Provider>
+		<a class="skip-link" href="#app-view">Skip to main content</a>
 		<component
 			:is="layoutComponent"
 			id="app-layout"
@@ -86,3 +87,23 @@ onBeforeMount(() => {
 	}, 500)
 })
 </script>
+
+
+<style scoped>
+.skip-link {
+	position: fixed;
+	z-index: 9999;
+	top: 10px;
+	left: 10px;
+	padding: 9px 12px;
+	border-radius: 9px;
+	background: var(--primary-color);
+	color: white;
+	font-size: 12px;
+	font-weight: 700;
+	text-decoration: none;
+	transform: translateY(-180%);
+	transition: transform 0.16s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+</style>

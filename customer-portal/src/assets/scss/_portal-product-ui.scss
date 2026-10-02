@@ -1,0 +1,92 @@
+:root {
+	--portal-panel-radius: 16px;
+	--portal-panel-border: rgba(var(--border-color-rgb) / 0.72);
+	--portal-panel-shadow: 0 12px 34px rgba(3, 7, 18, 0.055);
+}
+
+.portal-hero {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 22px;
+	padding: 22px 24px;
+	border: 1px solid var(--portal-panel-border);
+	border-radius: var(--portal-panel-radius);
+	background:
+		linear-gradient(135deg, rgba(var(--primary-color-rgb) / 0.09), transparent 48%),
+		var(--bg-default-color);
+	box-shadow: var(--portal-panel-shadow);
+}
+
+.portal-hero__eyebrow {
+	margin-bottom: 6px;
+	color: var(--primary-color);
+	font-size: 0.68rem;
+	font-weight: 800;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+}
+
+.portal-hero h1 {
+	margin: 0;
+	font-family: var(--font-family-display);
+	font-size: clamp(1.55rem, 2.5vw, 2.1rem);
+	line-height: 1.1;
+	letter-spacing: -0.035em;
+}
+
+.portal-hero p {
+	margin: 8px 0 0;
+	max-width: 680px;
+	color: var(--fg-secondary-color);
+	font-size: 0.84rem;
+	line-height: 1.6;
+}
+
+.portal-scope-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	max-width: 320px;
+	padding: 7px 10px;
+	border: 1px solid var(--portal-panel-border);
+	border-radius: 999px;
+	background: rgba(var(--bg-secondary-color-rgb) / 0.82);
+	color: var(--fg-secondary-color);
+	font-size: 0.7rem;
+}
+
+.portal-panel {
+	border: 1px solid var(--portal-panel-border);
+	border-radius: var(--portal-panel-radius);
+	background: var(--bg-default-color);
+	box-shadow: var(--portal-panel-shadow);
+}
+
+@media (max-width: 760px) {
+	.portal-hero { align-items: flex-start; flex-direction: column; padding: 18px; }
+}
+
+/* R7 accessibility and responsive hardening */
+#app-view:focus { outline: none; }
+.page { min-width: 0; }
+.portal-panel { overflow-wrap: anywhere; }
+
+@media (max-width: 700px) {
+	:root { --portal-panel-radius: 13px; }
+	.portal-hero h1 { font-size: 1.5rem; }
+	.portal-hero p { font-size: 0.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+@media (pointer: coarse) {
+	:where(button, [role="button"], a.n-button) { min-height: 40px; }
+}

@@ -1,31 +1,32 @@
 <template>
-	<header class="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
-		<div class="flex min-w-0 flex-col gap-1.5">
-			<h1 class="font-display text-2xl leading-tight font-semibold tracking-tight text-balance">
-				Security overview
-			</h1>
-			<p class="text-secondary text-sm">
-				Your organization's security posture and the latest activity from the SOC.
+	<header class="portal-hero">
+		<div class="min-w-0">
+			<div class="portal-hero__eyebrow">Security service overview</div>
+			<h1>Security posture</h1>
+			<p>
+				A concise view of current security workload, protected assets, recent activity, and SOC-delivered findings.
 			</p>
 		</div>
 
-		<div class="text-tertiary flex items-center gap-4 font-mono text-xs">
-			<span class="flex items-center gap-1.5" :title="scopeTitle">
+		<div class="flex min-w-0 flex-col items-end gap-3 max-[760px]:items-start">
+			<div class="portal-scope-chip" :title="scopeTitle">
 				<Icon name="carbon:filter" :size="14" />
-				<span class="max-w-60 truncate">{{ scopeLabel }}</span>
-			</span>
-			<span v-if="lastUpdated" class="tabular-nums">updated {{ formatDate(lastUpdated, dFormats.time) }}</span>
-			<n-button
-				size="small"
-				quaternary
-				:disabled="refreshing"
-				aria-label="Refresh overview"
-				@click="emit('refresh')"
-			>
-				<template #icon>
-					<Icon name="carbon:renew" :class="{ 'animate-spin': refreshing }" />
-				</template>
-			</n-button>
+				<span class="truncate">{{ scopeLabel }}</span>
+			</div>
+			<div class="text-tertiary flex items-center gap-3 font-mono text-xs">
+				<span v-if="lastUpdated" class="tabular-nums">updated {{ formatDate(lastUpdated, dFormats.time) }}</span>
+				<n-button
+					size="small"
+					quaternary
+					:disabled="refreshing"
+					aria-label="Refresh security overview"
+					@click="emit('refresh')"
+				>
+					<template #icon>
+						<Icon name="carbon:renew" :class="{ 'animate-spin': refreshing }" />
+					</template>
+				</n-button>
+			</div>
 		</div>
 	</header>
 </template>
@@ -44,16 +45,11 @@ defineProps<{
 	refreshing: boolean
 }>()
 
-const emit = defineEmits<{
-	(e: "refresh"): void
-}>()
-
+const emit = defineEmits<{ (e: "refresh"): void }>()
 const authStore = useAuthStore()
 const customerFilterStore = useCustomerFilterStore()
 const dFormats = useSettingsStore().dateFormat
 
-// What the numbers below are scoped to: the global filter's selection, or every
-// customer the user can see.
 const scopeCodes = computed(() =>
 	customerFilterStore.selectedCustomerCodes.length
 		? customerFilterStore.selectedCustomerCodes
@@ -62,10 +58,10 @@ const scopeCodes = computed(() =>
 
 const scopeLabel = computed(() => {
 	if (!customerFilterStore.selectedCustomerCodes.length && authStore.accessibleCustomerCodes.length > 1) {
-		return `all customers (${authStore.accessibleCustomerCodes.length})`
+		return `All customers (${authStore.accessibleCustomerCodes.length})`
 	}
-	return scopeCodes.value.join(", ") || "no customer"
+	return scopeCodes.value.join(", ") || "No customer scope"
 })
 
-const scopeTitle = computed(() => `Scope: ${scopeCodes.value.join(", ")}`)
+const scopeTitle = computed(() => `Security data scope: ${scopeCodes.value.join(", ")}`)
 </script>

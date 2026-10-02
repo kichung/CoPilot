@@ -6,7 +6,7 @@
 				{{ title }}
 			</div>
 			<div class="text-secondary text-lg">
-				Access the world of OpenSource security: Simplified, Streamlined, Accessible.
+				{{ brandConfig.tagline }}
 			</div>
 		</div>
 
@@ -20,6 +20,7 @@
 import type { FormType } from "./types.d"
 import { computed, onBeforeMount, ref } from "vue"
 import Logo from "@/app-layouts/common/Logo.vue"
+import { brandConfig } from "@/branding/brand.config"
 import SignIn from "./SignIn.vue"
 
 const props = defineProps<{
@@ -27,13 +28,7 @@ const props = defineProps<{
 }>()
 
 const type = ref<FormType>("signin")
-const title = computed<string>(() =>
-	type.value === "signin"
-		? "SOCFortress CoPilot"
-		: type.value === "signup"
-			? "SOCFortress CoPilot"
-			: "Forgot Password"
-)
+const title = computed<string>(() => (type.value === "forgotpassword" ? "Forgot Password" : brandConfig.appName))
 
 onBeforeMount(() => {
 	if (props.type) {
